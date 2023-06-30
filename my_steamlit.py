@@ -54,13 +54,13 @@ elif options == "Mapa":
     #Creamos mapa
     st.map(data=data, zoom=11)
     # Agrupar los datos por distrito y contar el número de cargadores en cada distrito
-    data_distrito = data.groupby("DISTRITO")["Nº CARGADORES"].count()
+    data_distrito = data.groupby("DISTRITO")["Nº CARGADORES"].sum()
 
     # # Mostrar un gráfico de barras con los cargadores por distrito
     st.bar_chart(data_distrito)
 
     # # Agrupar los datos por operador y contar el número de cargadores para cada operador
-    data_operador = data.groupby("OPERADOR")["Nº CARGADORES"].count()
+    data_operador = data.groupby("OPERADOR")["Nº CARGADORES"].sum()
 
     # # Mostrar un gráfico de barras con los cargadores por operador
     st.bar_chart(data_operador)
@@ -88,15 +88,15 @@ elif options == "Filtros":
     use_operator_filter = st.sidebar.checkbox("Usar filtro de operador")
 
     # Crear una casilla de verificación para habilitar o deshabilitar el filtro de número mínimo y máximo de cargadores
-    use_chargers_filter = st.sidebar.checkbox("Usar filtro de número mínimo y máximo de cargadores")
+    #use_chargers_filter = st.sidebar.checkbox("Usar filtro de número mínimo y máximo de cargadores")
 
     # Filtrar los datos según los filtros seleccionados por el usuario
     if use_district_filter:
         data = data[data["DISTRITO"] == selected_district]
     if use_operator_filter:
         data = data[data["OPERADOR"] == selected_operator]
-    if use_chargers_filter:
-        data = data[(data["Nº CARGADORES"] >= min_chargers) & (data["Nº CARGADORES"] <= max_chargers)]
+    #if use_chargers_filter:
+        #data = data[(data["Nº CARGADORES"] >= min_chargers) & (data["Nº CARGADORES"] <= max_chargers)]
 
     # Comprobar si el dataframe está vacío después de aplicar los filtros
     if data.empty:
@@ -106,8 +106,6 @@ elif options == "Filtros":
         # Detener la ejecución del código
         st.stop()
 
-    # Mostrar un mapa con las ubicaciones de las estaciones
-    st.map(data)
 
     # Comprobar si se ha aplicado el filtro de distrito
     if use_district_filter:
@@ -133,19 +131,19 @@ elif options == "Filtros":
         st.bar_chart(data_operador)
 
     # Agrupar los datos por tamaño y contar el número de cargadores para cada tamaño
-    data_tamaño = data.groupby("Tamaño")["Nº Cargadores"].sum()
+    #data_n_cargadores = data.groupby("Nº CARGADORES")["Nº CARGADORES"].count()
 
     # Mostrar un gráfico de barras con el número de cargadores por tamaño
-    st.bar_chart(data_tamaño)
+    #st.bar_chart(data_n_cargadores)
 
     # Crear dos columnas con una proporción 3:2
-    col1, col2 = st.columns((3, 2))
+    # col1, col2 = st.columns((3, 2))
 
-    # Mostrar contenido en la primera columna
-    col1.write("Contenido en la primera columna")
+    # # Mostrar contenido en la primera columna
+    # col1.write("Contenido en la primera columna")
 
-    # Mostrar contenido en la segunda columna
-    col2.write("Contenido en la segunda columna")
+    # # Mostrar contenido en la segunda columna
+    # col2.write("Contenido en la segunda columna")
 
 
 
