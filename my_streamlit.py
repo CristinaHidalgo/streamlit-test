@@ -15,7 +15,7 @@ options = st.sidebar.selectbox(label = "Selecciona una opción", options = ["Hom
 st.write(f"Has elegido {options} como opción") #st.write es como print en la web
 
 #Cargamos datos:
-data = pd.read_csv(r'data\red_recarga_acceso_publico_2021.csv', sep=';')
+data = pd.read_csv('data/red_recarga_acceso_publico_2021.csv', sep=';')
 data.rename(columns={'longitud':'lon', 'latidtud': 'lat'}, inplace=True)
 
 #Para que otra persona pueda subir un fichero 
@@ -33,7 +33,7 @@ if options == "Home":
 
     st.sidebar.write("Carga tu fichero aquí") #Lo mete en la barra lateral si ponemos st.sidebar
 
-    image = Image.open('img\puntos-recarga-madrid.jpg')
+    image = Image.open('img/puntos-recarga-madrid.jpg')
 
 
     st.title('Mi first Streamlit APP')
